@@ -17,6 +17,6 @@ then
 	echo -e "paquets.sh: Indica quins paquets estan instal·lats en el sistema i en quina versió.\n\tParàmetres:\n\t\t-\n\tRetorn\n\t\t-" >&2
 	exit 1
 else
-	echo -e "Els paràmetres introduïts son incorrectes." >&2
+	echo -e "Error: Els paràmetres introduïts son incorrectes." >&2
 	exit 2
 fi

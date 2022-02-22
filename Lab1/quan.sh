@@ -10,7 +10,7 @@
 
 if [ $# -eq 0 ]
 then
-	echo -e "Es requereix al menys un paquet com a paràmetre." >&2
+	echo -e "Error: Es requereix al menys un paquet com a paràmetre." >&2
 	exit 1
 elif [ $1 = '-h' ]
 then

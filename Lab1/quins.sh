@@ -23,10 +23,10 @@ then
 		echo -e "Descripció: Donada una data i una hora, s'indica quins paquets han sigut instal·lats posteriorment.\n\tParàmetres:\n\t\t- Data\n\t\t- Hora\n\tRetorn:\n\t\t-" >&2
 		exit 1
 	else
-		echo -e "El número de paràmetres és incorrecte." >&2
+		echo -e "Error: El número de paràmetres és incorrecte." >&2
 		exit 2
 	fi
 else
-	echo -e "El número de paràmetres és incorrecte." >&2
+	echo -e "Error: El número de paràmetres és incorrecte." >&2
 	exit 2
 fi

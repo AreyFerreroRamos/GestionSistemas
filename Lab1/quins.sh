@@ -11,10 +11,21 @@
 
 if [ $# -eq 2 ]
 then
-	liniaFinal=$(cat /var/log/dpkg.log* | wc -l)
-	liniaInicial=$(cat /var/log/dpkg.log* | grep -n "$data $hora" | head -1 | cut -f1 -d':')
-	let numLinies=liniaFinal-liniaInicial
-	cat /var/log/dpkg.log* | tail -$numLinies
+	dataHora=$(echo $1 | tr -d '-')$(echo $2 | tr -d ':')
+	trobat=0
+	IFS=$'\n'
+	for linia in $(cat /var/log/dpkg.log* | grep "status installed" | sort)
+	do
+		if [ $trobat -eq 0 ]
+		then
+			if [ $(echo $linia | cut -f1,2 -d' ' | tr -d '-' | tr -d ':' | tr -d ' ') -gt $dataHora ]
+			then
+				trobat=1
+			fi
+		else
+			echo $linia | cut -f1,2,5 -d' ' | cut -f1,2,3 -d':'
+		fi
+	done
 	exit 0
 elif [ $# -eq 1 ]
 then

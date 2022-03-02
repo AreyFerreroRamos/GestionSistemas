@@ -1,0 +1,8 @@
+[Unit]
+Description=Friday 22:00 system shutdown
+
+[Timer]
+OnCalendar=Fri *-*-* 22:00:00
+
+[Install]
+WantedBy=timers.target

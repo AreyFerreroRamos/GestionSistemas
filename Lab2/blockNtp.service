@@ -1,0 +1,14 @@
+[Unit]
+Description=Block Network Time Service
+After=ntp.service
+Conflicts=ntp.service
+
+[Service]
+Type=simple
+# Debian uses a shell wrapper to process /etc/default/ntp
+# and select DHCP-provided NTP servers if available
+ExecStart=/usr/lib/ntp/ntp-systemd-wrapper
+PrivateTmp=true
+
+[Install]
+WantedBy=graphical.target

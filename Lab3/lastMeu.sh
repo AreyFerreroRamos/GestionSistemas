@@ -16,7 +16,7 @@
 
 if [ $(id -u) -eq 0 ]
 then
-	if [ $# -lt 5 ]
+	if [ $# -lt 9 ]
 	then
 		if [ $1 = "-h" ]
 		then
@@ -24,20 +24,25 @@ then
 			exit 4
 		else
 			lastMe="lastcomm --forwards --strict-match"
-			while getopts u:c:d:f:h option
+			activeDate=0
+			activeFlag=0
+			while getopts u:c:d:f: option
 			do
 				case $option in
 					u)
-						lastMe="$lastMe --user ${OPTAR}'"
+						lastMe="$lastMe --user ${OPTARG}"
 						;;
 					c)
 						lastMe="$lastMe --command ${OPTARG}"
 						;;
 					d)
-						lastMe="$lastMe "
+						activeDate=1
+						
+						#date=$(echo ${OPTARG} | cut -c5-8)
 						;;
 					f)
-						lastMe="$lastMe "
+						activeFlag=1
+						flag=${OPTARG}
 						;;
 					*)
 						echo -e "Error: El paràmetre és incorrecte." >&2
@@ -45,7 +50,26 @@ then
 						;;
 				esac
 			done
-			$lastMe | awk '{print $1, $(NF-2), $(NF-1), $NF}'
+			if [ $activeDate -eq 1 ]
+			then
+				echo -e "La data no s'ha aconsegit implementar."
+				#IFS='\n'
+				#for line in $($lastMe)
+				#do
+					#echo "linia: $linia"
+					#d=$(echo $linia | awk '{print $(NF-1), $(NF-2)}')
+					#echo $d
+					#if [ date -d"$d" +%m%d -le $date ]
+					#then
+						#echo $linia
+					#fi
+				#done
+			elif [ $activeFlag -eq 1 ]
+			then
+				$lastMe | grep -E -e "(S|F|C|D|X| )$flag(S|F|C|D|X| )" | awk '{print $1, $(NF-7), $(NF-2), $(NF-1), $NF}' | column -t
+			else
+				$lastMe | awk '{print $1, $(NF-7), $(NF-2), $(NF-1), $NF}' | column -t
+			fi
 		fi
 	else
 		echo -e "Error: El número de paràmetres és incorrecte." >&2

@@ -8,8 +8,13 @@
 # 	Retorn:
 #		-Fitxer amb els PIDs dels processos que es vagin aturant.
 
-for pid in $(ps aux | grep "senseFi" | tr -s ' ' | cut -f2 -d' ' | head -n -1)
+IFS=$'\n'
+for proces in $(ps aux | grep senseFi)
 do
-	kill -SIGSTOP $pid
-	echo $pid >> pidsProcessos.txt
+	if [ $(echo $proces | tr -s ' ' | cut -f8 -d' ') = "R+" ]
+	then
+		pid=$(echo $proces | tr -s ' ' | cut -f2 -d' ')
+		kill -SIGSTOP $pid
+		echo $pid >> pidsProcessos.txt
+	fi
 done

@@ -8,4 +8,10 @@
 # 	Retorn:
 #		-
 
+IFS=$'\n'
+for pid in $(cat $1)
+do
+	kill -SIGCONT $pid
+	sleep 10
+done
 

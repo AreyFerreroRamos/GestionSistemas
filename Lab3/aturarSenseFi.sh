@@ -8,4 +8,8 @@
 # 	Retorn:
 #		-Fitxer amb els PIDs dels processos que es vagin aturant.
 
-
+for pid in $(ps aux | grep "senseFi" | tr -s ' ' | cut -f2 -d' ' | head -n -1)
+do
+	kill -SIGSTOP $pid
+	echo $pid >> pidsProcessos.txt
+done

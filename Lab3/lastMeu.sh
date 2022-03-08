@@ -36,9 +36,14 @@ then
 						lastMe="$lastMe --command ${OPTARG}"
 						;;
 					d)
-						activeDate=1
-						
-						#date=$(echo ${OPTARG} | cut -c5-8)
+						if [ $(echo ${OPTARG} | cut -c1-4) -eq $(date +%Y) ]
+						then
+							activeDate=1
+							date=$(echo ${OPTARG} | cut -c5-8)
+						else
+							echo -e "No hi ha informació d'accounting d'anys diferents de l'actual." >&2
+							exit 4
+						fi
 						;;
 					f)
 						activeFlag=1
@@ -52,24 +57,23 @@ then
 			done
 			if [ $activeDate -eq 1 ]
 			then
-				echo -e "La data no s'ha aconsegit implementar."
-				#IFS='\n'
-				#for line in $($lastMe)
+				echo -e "La data no s'ha acopnseguit implementar."
+				#while read line;
 				#do
-					#echo "linia: $linia"
+					#echo $line | column -t
 					#d=$(echo $linia | awk '{print $(NF-1), $(NF-2)}')
-					#echo $d
 					#if [ date -d"$d" +%m%d -le $date ]
 					#then
-						#echo $linia
+						#echo $line
 					#fi
-				#done
+				#done < <(echo "$lastMe")
 			elif [ $activeFlag -eq 1 ]
 			then
 				$lastMe | grep -E -e "(S|F|C|D|X| )$flag(S|F|C|D|X| )" | awk '{print $1, $(NF-7), $(NF-2), $(NF-1), $NF}' | column -t
 			else
 				$lastMe | awk '{print $1, $(NF-7), $(NF-2), $(NF-1), $NF}' | column -t
 			fi
+			exit 0
 		fi
 	else
 		echo -e "Error: El número de paràmetres és incorrecte." >&2

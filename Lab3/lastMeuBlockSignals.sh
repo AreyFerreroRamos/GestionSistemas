@@ -14,6 +14,9 @@
 #		-d: Comandes executades a partir d'una determinada data.
 #		-f: Comandes que tenen actiu aquest flag.
 
+trap 'echo "No es pot avortar el procés amb el senyal SIGINT."' SIGINT
+trap 'echo "No es pot avortar el procés amb el senyal SIGTERM."' SIGTERM
+
 if [ $(id -u) -eq 0 ]
 then
 	if [ $# -lt 9 ]

@@ -1,0 +1,29 @@
+#Guio7 : Calculeu el combinatori m sobre n
+#	(Utilitzant la funció factorial)
+
+function factorial {
+	local f
+	local i
+	f=1
+	i=2
+	while [ $i -le $1 ]
+	do
+		let f=f*i
+		let i=i+1
+	done
+	echo $f
+}
+
+if [ $# -ne 2 ]
+then
+	echo "Us: ./guio7 m n"
+	exit 1
+else
+	temp1=$(factorial $2)
+	let temp2=$1-$2
+	temp2=$(factorial $temp2)
+	let temp2=temp1*temp2
+	temp3=$(factorial $1)
+	let temp1=temp3/temp2
+	echo "$1 sobre $2 = $temp1"
+fi

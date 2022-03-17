@@ -1,0 +1,6 @@
+#Guio1: Llista mida + nom fitxers
+ls -l | tr -s ' ' > fa
+cat fa | cut -d' ' -f9 > fb
+cat fa | cut -d' ' -f5 > fc
+paste fc fb
+rm fa fb fc

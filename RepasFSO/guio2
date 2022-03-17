@@ -1,0 +1,6 @@
+#Guio2: Llisteu un camp + nom fitxers (Camp es un número entre 1 i 8).
+ls -l $1 | tr -s ' ' > fa
+cat fa | cut -d' ' -f9 > fb
+cat fa | cut -d' ' -f$2 > fc
+paste fc fb
+rm fa fb fc

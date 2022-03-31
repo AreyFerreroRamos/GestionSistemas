@@ -20,6 +20,7 @@ then
 			echo $pid >> pidsProcessos.txt
 		fi
 	done
+	exit 0
 elif [ $1 = "-h" ]
 then
 	echo -e "aturarSenseFi.sh: S'aturen una vegada els processos anomenats senseFi (Processos que s'han creat cada cert temps i en hores diferents i que consumeixen CPU i no acaben mai).\n\tParàmetres:\n\t\t-\n\tRetorn:\n\t\t-Fitxer amb els PIDs dels processos que es vagin aturant." >&2

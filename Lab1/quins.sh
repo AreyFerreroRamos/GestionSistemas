@@ -20,6 +20,7 @@ then
 		then
 			if [ $(echo $linia | cut -f1,2 -d' ' | tr -d '-' | tr -d ':' | tr -d ' ') -gt $dataHora ]
 			then
+				echo $linia | cut -f1,2,5 -d' ' | cut -f1,2,3 -d':'
 				trobat=1
 			fi
 		else

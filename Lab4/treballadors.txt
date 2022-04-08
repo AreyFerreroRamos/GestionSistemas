@@ -1,0 +1,4 @@
+dni:Cognom1 Cognom2,Nom:Telefon:Departament:projecte1,projecte2,projecte3,...
+39456754D:Lopez de Angelo, Joan Josep:678459348:Administrador:raspberry,missat,disseny
+98765476F:Gomez Sole,Anna:675877887:Disseny:raspberry,disseny,copies
+76863590P:Perez Gimeno, Maria:746797533:Marqueting:raspberry

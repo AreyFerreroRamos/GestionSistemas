@@ -20,7 +20,7 @@ else
 	IFS=$' '
 	for paquet in $*
 	do
-		linia=$(cat /var/log/dpkg.log* | grep "status installed $paquet:")
+		linia=$(zcat /var/log/dpkg.log* | grep "status installed $paquet:")
 		if [[ -z $linia ]]
 	       	then
 			echo -e "El paquet '$paquet' no està instal·lat."

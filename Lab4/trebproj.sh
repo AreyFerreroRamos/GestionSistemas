@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Autor: Arey Ferrero Ramos.
-# Data: 20 d'abril del 2022. Versió: 1.
+# Data: 19 d'abril del 2022. Versió: 1.
 # Descripció: Donat el nom d'un projecte, es mou el treballador que ha executat l'script sota del directori del projecte, es canvia el seu grup actiu al projecte, i mostra el temps que el treballador ha passat 
 #		en el projecte quan aquest en surt (exit). Els fitxers generats per aquest script només els podran modificar els usuaris associats a aquest projecte. 
 #	Paràmetres:
@@ -16,7 +16,9 @@ then
 		echo -e "Descripció: Donat el nom d'un projecte, es mou el treballador que ha executat l'script sota del directori del projecte, es canvia el seu grup actiu al projecte, i mostra el temps que el treballador ha passat en el projecte quan aquest en surt (exit). Els fitxers generats per aquest script només els podran modificar els usuaris associats a aquest projecte.\n\tParàmetres:\n\t\t-Nom del projecte.\n\tSortida:\n\t\t-" >&2
 		exit 2
 	else
-
+		cd /projectes/$1
+		umask 0026
+		time newgrp $1									
 		exit 0
 	fi
 else

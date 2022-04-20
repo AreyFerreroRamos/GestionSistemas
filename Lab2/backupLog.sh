@@ -23,8 +23,9 @@
 do_start()
 {
 	mkdir -p /back/logs
-	tar czvf /back/logs/$(date +%y%m%d%H%M).tgz /var/log
-	logger "$(ls -l /back/logs/* | cut -f5 -d' ')"
+	nom=/back/logs/$(date +%y%m%d%H%M).tgz
+	tar czvf $nom /var/log
+	logger "$nom, $(ls -l /back/logs/* | cut -f5 -d' ')"
 	exit 0
 }
 

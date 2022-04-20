@@ -7,7 +7,6 @@ Conflicts=ntp.service
 Type=simple
 # Debian uses a shell wrapper to process /etc/default/ntp
 # and select DHCP-provided NTP servers if available
-ExecStart=/usr/lib/ntp/ntp-systemd-wrapper
 PrivateTmp=true
 
 [Install]

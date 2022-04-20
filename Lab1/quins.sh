@@ -14,7 +14,7 @@ then
 	dataHora=$(echo $1 | tr -d '-')$(echo $2 | tr -d ':')
 	trobat=0
 	IFS=$'\n'
-	for linia in $(cat /var/log/dpkg.log* | grep "status installed" | sort)
+	for linia in $(zcat /var/log/dpkg.log* | grep "status installed" | sort)
 	do
 		if [ $trobat -eq 0 ]
 		then

@@ -25,6 +25,10 @@ then
 		echo -e "/dev/sdb\t/usuaris\text2\tdefaults,grpquota\t0\t0" >> /etc/fstab
 		mount -o remote /usuaris
 		quotacheck -g /usuaris
+		edquota -g Administrador
+		edquota -g Disseny
+		edquota -g Marqueting
+		quotaoff -g /usuaris
 		quotaon -g /usuaris
 
 		exit 0

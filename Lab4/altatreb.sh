@@ -31,9 +31,8 @@ then
 				groupadd -f $departament
 				chgrp $departament /usuaris/$departament
 				chmod g+w /usuaris/$departament
-				grups=$departament" "$projectes
 				IFS=$' '
-				useradd -m -d /usuaris/$departament/$dni -G $grups -p $(openssl passwd -1 "SALT$dni") $dni
+				useradd -m -d /usuaris/$departament/$dni -G $departament,$projectes -p $(openssl passwd -1 "SALT$dni") $dni
 			done <<< "$(cat $1 | tail -n +2)"
 			exit 0
 		elif [ $1 = "-h" ]

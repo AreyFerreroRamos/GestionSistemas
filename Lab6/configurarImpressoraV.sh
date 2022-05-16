@@ -13,7 +13,19 @@ if [ $(id -u) -eq 0 ]
 then
 	if [ $# -eq 0 ]
 	then
-		
+		dpkg -l cups >> /dev/null
+		if [ $? -eq 4 ]
+		then
+			apt-get install cups
+			apt-get install cups-pdf	
+		fi
+			# Per llistar els dispositius existents s'utilitza la comanda 'lpinfo -v'. 
+			# Per llistar els drivers dels dispositius existents s'utilitza la comanda 'lpinfo -m'.
+		lpadmin -p impressoraV -E -v cups-pdf:/ -m lsb/usr/cups-pdf/CUPS-PDF_opt.ppdi
+			# Per comprovar que la impressoraV accepta peticions s'utilitza la comanda 'lpstat -a'.
+		sed -i 's/Out ${HOME}\/PDF/Out \/mnt\/mem\/DocsPDF${USER}/g' /etc/cups/cups-pdf.conf	
+		lpoptions -p impressoraV -o landscape -o ColorMode=Black -o number-up=2  	
+			# Per enviar un document a imprimir s'utilitza la comanda 'lp -d impressoraV <nom_document>'.
 		exit 0
 	elif [ $1 = "-h" ]
 	then

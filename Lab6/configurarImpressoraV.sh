@@ -27,7 +27,7 @@ then
 		sed -i 's/Out ${HOME}\/PDF/Out \/mnt\/mem\/DocsPDF${USER}/g' /etc/cups/cups-pdf.conf
 			# Per configurar que la impressora per defecte sigui impressoraV, s'obre el firefox i es busca 'localhost:631/printers/impressoraV'. Es selecciona la pestanya desplegable 'Administration'
 			# i es tria l'opció 'set as server default'.	
-		lpoptions -p impressoraV -o landscape -o ColorMode=Black -o number-up=2  	
+		lpoptions -p impressoraV -o orientation-requested=4 -o ColorMode=Black -o number-up=2 	
 			# Per enviar un document a imprimir s'utilitza la comanda 'lp -d impressoraV <nom_document>'.
 		exit 0
 	elif [ $1 = "-h" ]

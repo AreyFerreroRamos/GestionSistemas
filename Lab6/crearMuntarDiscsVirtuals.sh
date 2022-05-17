@@ -21,6 +21,7 @@ then
 			mkdir -p /home/$usuari/Baixades
 			echo -e "tmpfs\t/home/$usuari/Baixades\ttmpfs\tdefaults,user,noauto,size=100M\t0\t0" >> /etc/fstab
 			echo -e "mount /home/$usuari/Baixades" >> /etc/profile
+			echo -e "trap 'umount /home/$usuari/Baixades' EXIT" >> /etc/profile
 		done	
 		mount -a	# S'utiltza la comanda 'df -l' per comprovar que s'ha muntat el disc.
 		exit 0

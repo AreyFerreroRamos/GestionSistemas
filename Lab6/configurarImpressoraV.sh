@@ -23,7 +23,10 @@ then
 			# Per llistar els drivers dels dispositius existents s'utilitza la comanda 'lpinfo -m'.
 		lpadmin -p impressoraV -E -v cups-pdf:/ -m lsb/usr/cups-pdf/CUPS-PDF_opt.ppdi
 			# Per comprovar que la impressoraV accepta peticions s'utilitza la comanda 'lpstat -a'.
-		sed -i 's/Out ${HOME}\/PDF/Out \/mnt\/mem\/DocsPDF${USER}/g' /etc/cups/cups-pdf.conf	
+		sed -i 's/Out ${HOME}\/PDF/Out \/mnt\/mem\/DocsPDF${USER}/g' /etc/cups/cups-pdf.conf
+		sed -i 's/@{HOME}\/PDF\/ rw,\\n  @{HOME}\/PDF\/* rw,/\/mnt\/mem\/DocsPDF${USER} rw,\\n\/mnt\/mem\/DocsPDF${USER}\/* rw,/g' /etc/apparmor.d/usr.sbin.cupsd
+			# Per configurar que la impressora per defecte sigui impressoraV, s'obre el firefox i es busca 'localhost:631/printers/impressoraV'. Es selecciona la pestanya desplegable 'Administration'
+			# i es tria l'opció 'set as server default'.	
 		lpoptions -p impressoraV -o landscape -o ColorMode=Black -o number-up=2  	
 			# Per enviar un document a imprimir s'utilitza la comanda 'lp -d impressoraV <nom_document>'.
 		exit 0

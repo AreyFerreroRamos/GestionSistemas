@@ -12,7 +12,15 @@ if [ $(id -u) -eq 0 ]
 then
 	if [ $# -eq 0 ]
 	then
-
+		for usuari in $(ls -l /home | tail -n +2 | tr -s ' ' | cut -f10 -d' ')
+		do
+			var=$(last -s -3days | grep $usuari)
+			if [[ ! -z $var ]]
+			then
+				total=$(du /home/$usuari | tail -1 | cut -f1)
+				echo "El directori d'entrada de l'usuari '$usuari' ocupa: $total Bytes."
+			fi
+		done
 		exit 0
 	elif [ $1 = "-h" ]
 	then

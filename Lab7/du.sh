@@ -18,7 +18,7 @@ then
 			if [[ ! -z $var ]]
 			then
 				total=$(du /home/$usuari | tail -1 | cut -f1)
-				echo "El directori d'entrada de l'usuari '$usuari' ocupa: $total Bytes."
+				echo "El directori d'entrada de l'usuari '$usuari' ocupa $total Bytes."
 			fi
 		done
 		exit 0

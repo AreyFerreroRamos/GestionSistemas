@@ -12,13 +12,18 @@ if [ $(id -u) -eq 0 ]
 then
 	if [ $# -eq 0 ]
 	then
-		for usuari in $(ls -l /home | tail -n +2 | tr -s ' ' | cut -f10 -d' ')
+		for linia in $(cat /etc/passwd)
 		do
-			var=$(last -s -3days | grep $usuari)
-			if [[ ! -z $var ]]
+			dir=$(echo $linia | cut -f6 -d':')
+			if [[ $(echo $dir | cut -f1,2 -d'/') = "/home" ]]
 			then
-				total=$(du /home/$usuari | tail -1 | cut -f1)
-				echo "El directori d'entrada de l'usuari '$usuari' ocupa $total Bytes."
+				usuari=$(echo $linia | cut -f1 -d':')	
+				var=$(last -s -3days | grep $usuari)
+				if [[ ! -z $var ]]
+				then
+					total=$(du $dir | tail -1 | cut -f1)
+					echo "El directori d'entrada de l'usuari '$usuari' ocupa $total Bytes."
+				fi
 			fi
 		done
 		exit 0
